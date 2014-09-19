@@ -1,0 +1,11 @@
+<%= form_for(Rating.new) do |f| %>
+<div class="field">
+  <%= f.label :product_energy_cost_id %>
+  <%= f.collection_select(:product_energy_cost_id, ProductEnergyCost.all, :id, :to_string, :prompt => 'Select', :selected => params[:id] ) %><br>
+  <%= f.label :rating %>
+  <%= f.text_field :rating %><br>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

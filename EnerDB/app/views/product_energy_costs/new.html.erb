@@ -1,0 +1,11 @@
+<%= form_for(ProductEnergyCost.new()) do |f| %>
+<div class="field">
+  <%= f.label :product %>
+  <%= f.collection_select(:product_id,Product.all, :id, :product_name, :prompt => 'Select', :selected => params[:id]) %><br>
+  <%= f.label :energy_cost %>
+  <%= f.text_field :energy_cost %><br>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

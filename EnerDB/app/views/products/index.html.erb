@@ -1,0 +1,32 @@
+<h1>Products</h1>
+<table>
+	<tr><td>Category</td><td>Name</td><td>Energy Cost</td><td>Reliability</td></tr>
+	<% @products.each do |product| %>
+		<% cost_rating = product.cost_rating_string %>
+		<tr><td><%= link_to product.product_category.category_name, product.product_category if not product.product_category.nil? %></td><td><%= link_to product.product_name, product %></td><td><%= link_to cost_rating[0],:controller => :product_energy_costs, :action => :new, :id => product.id %></td><td><%= cost_rating[1] %></td></tr>
+	<% end %>
+</table>
+<h2>Highest Energy Costs - Top5</h2>
+<table>
+	<tr><td>Category</td><td>Name</td><td>Energy Cost</td><td>Reliability</td></tr>
+	<% @products.select{|x| not x.cost_rating[0].nil?}.sort_by{|x| x.cost_rating[0].nil? ? -1 : - x.cost_rating[0]}[0..4].each do |product| %>
+		<% cost_rating = product.cost_rating_string %>
+		<tr><td><%= link_to product.product_category.category_name, product.product_category if not product.product_category.nil? %></td><td><%= link_to product.product_name, product %></td><td><%= link_to cost_rating[0],:controller => :product_energy_costs, :action => :new, :id => product.id %></td><td><%= cost_rating[1] %></td></tr>
+	<% end %>
+</table>
+<h2>Smallest Energy Costs - Top5</h2>
+<table>
+	<tr><td>Category</td><td>Name</td><td>Energy Cost</td><td>Reliability</td></tr>
+	<% @products.select{|x| not x.cost_rating[0].nil?}.sort_by{|x| x.cost_rating[0].nil? ? -1 : x.cost_rating[0]}[0..4].each do |product| %>
+		<% cost_rating = product.cost_rating_string %>
+		<tr><td><%= link_to product.product_category.category_name, product.product_category if not product.product_category.nil? %></td><td><%= link_to product.product_name, product %></td><td><%= link_to cost_rating[0],:controller => :product_energy_costs, :action => :new, :id => product.id %></td><td><%= cost_rating[1] %></td></tr>
+	<% end %>
+</table>
+<h2>Incomplete Products</h2>
+<table>
+	<tr><td>Category</td><td>Name</td><td>Energy Cost</td><td>Reliability</td></tr>
+	<% @products.select{|x| x.cost_rating[0].nil?}[0..4].each do |product| %>
+		<% cost_rating = product.cost_rating_string %>
+		<tr><td><%= link_to product.product_category.category_name, product.product_category if not product.product_category.nil? %></td><td><%= link_to product.product_name, product %></td><td><%= link_to cost_rating[0],:controller => :product_energy_costs, :action => :new, :id => product.id %></td><td><%= cost_rating[1] %></td></tr>
+	<% end %>
+</table>

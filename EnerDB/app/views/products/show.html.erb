@@ -1,0 +1,24 @@
+<%= @product.product_name %>
+<h2>Energy Costs</h2>
+<table>
+<tr><td>Name</td><td>Energy Cost</td><td>Average Reliability</td></tr>
+<% @product.product_energy_costs.each do |cost| %>
+	<tr><td>Self-Cost</td><td><%= cost.energy_cost %></td><td><%= link_to cost.average_rating_string, :controller => :ratings, :action => :new, :id => cost.id %></td></tr>
+<% end %>
+<% @product.products.each do |product| %>
+	<% @sub_cost_rating = product.cost_rating_string %>
+	<tr><td><%= link_to product.product_name, product %></td><td><%= @sub_cost_rating[0] %></td><td><%= @sub_cost_rating[1] %></td></tr>
+<% end %>
+	<tr><td></td><td><%= @cost_rating_rec[0] %></td><td><%= @cost_rating_rec[1] %></td></tr>
+</table>
+
+<% if @category %>
+<h2>Alternative Products in Category <%= @category.category_name %></h2>
+<ul>
+	<% @alternative_products.each do |pro| %>
+		<% if pro != @product %>
+			<li><%= link_to pro.product_name, pro %></li>
+		<% end %>
+	<% end %>
+<% end %>
+</ul>
