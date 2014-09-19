@@ -1,4 +1,5 @@
-EnerDB::Application.routes.draw do
+#EnerDB::Application.routes.draw do
+Rails.application.routes.draw do
   devise_for :users
 
   get "product_categories/index"
